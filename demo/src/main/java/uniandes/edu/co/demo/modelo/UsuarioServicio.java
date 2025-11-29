@@ -1,6 +1,6 @@
 package uniandes.edu.co.demo.modelo;
 
-import java.util.List;
+
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,16 +13,17 @@ public class UsuarioServicio {
     @Id
     private int id;
     private String nombre;
-    private String ciudad;
-    private String presupuesto;
-    private int cant_sedes;
-    private List<Bebida> oferta_bebidas;
-    public UsuarioServicio(int id, String nombre, String ciudad, String presupuesto, int cant_sedes) {
+    private String celular;
+    private String cedula;
+    private String email;
+    private Tarjeta tarjeta;
+    public UsuarioServicio(int id, String nombre, String celular, String cedula, String email, Tarjeta tarjeta) {
         this.id = id;
         this.nombre = nombre;
-        this.ciudad = ciudad;
-        this.cant_sedes = cant_sedes;
-        this.presupuesto = presupuesto;
+        this.celular = celular;
+        this.cedula = cedula;
+        this.email = email;
+        this.tarjeta = tarjeta;
     }
     public int getId() {
         return id;
@@ -36,28 +37,29 @@ public class UsuarioServicio {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getCiudad() {
-        return ciudad;
+    public String getCelular() {
+        return celular;
     }
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
-    public String getPresupuesto() {
-        return presupuesto;
+    public String getCedula() {
+        return cedula;
     }
-    public void setPresupuesto(String presupuesto) {
-        this.presupuesto = presupuesto;
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
-    public int getCant_sedes() {
-        return cant_sedes;
+    public String getEmail() {
+        return email;
     }
-    public void setCant_sedes(int cant_sedes) {
-        this.cant_sedes = cant_sedes;
+    public void setEmail(String email) {
+        this.email = email;
     }
-    public List<Bebida> getOferta_bebidas() {
-        return oferta_bebidas;
+    public Tarjeta getTarjeta() {
+        return tarjeta;
     }
-    public void setOferta_bebidas(List<Bebida> oferta_bebidas) {
-        this.oferta_bebidas = oferta_bebidas;
+    public void setTarjeta(Tarjeta tarjeta) {
+        this.tarjeta = tarjeta;
     }
+    
 }
