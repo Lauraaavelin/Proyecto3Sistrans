@@ -6,18 +6,18 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.Update;
 
-import uniandes.edu.co.demo.modelo.Bar;
+import uniandes.edu.co.demo.modelo.UsuarioServicio;
 import uniandes.edu.co.demo.modelo.Bebida;
 
-public interface BarRepository extends MongoRepository<Bar, Integer> {
+public interface BarRepository extends MongoRepository<UsuarioServicio, Integer> {
 
     // Consultar todos los bares excluyendo la lista de bebidas para mejorar el rendimiento
     @Query(value = "{}", fields = "{ 'oferta_bebidas': 0 }")
-    List<Bar> buscarTodosLosBares();
+    List<UsuarioServicio> buscarTodosLosBares();
 
     // Consultar bar por su ID
     @Query("{_id: ?0}")
-    List<Bar> buscarPorId(int id);
+    List<UsuarioServicio> buscarPorId(int id);
 
     // Crear un nuevo bar
     @Query("{ $insert: { _id: ?0, nombre: ?1, ciudad: ?2, presupuesto: ?3, cant_sedes: ?4, oferta_bebidas: ?5 } }")
