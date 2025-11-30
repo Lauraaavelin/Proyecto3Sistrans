@@ -6,7 +6,6 @@ public class Vehiculo {
     private String marca;
     private String modelo;
     private String color;
-    private String ciudadPlaca;
     private Integer capacidad;
 
     public Vehiculo(String placa, String tipo, String marca, String modelo, String color, String ciudadPlaca, Integer capacidad){
