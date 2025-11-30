@@ -1,17 +1,11 @@
 package uniandes.edu.co.demo.Service;
 
-import java.sql.Date;
-import java.text.DateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.xml.crypto.Data;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.DateFormatter;
 
 import uniandes.edu.co.demo.modelo.Conductor2;
 import uniandes.edu.co.demo.modelo.Servicio;
