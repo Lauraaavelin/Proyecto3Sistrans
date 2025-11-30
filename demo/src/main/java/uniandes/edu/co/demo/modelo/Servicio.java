@@ -13,11 +13,11 @@ public class Servicio {
     private int id;
     private String fecha;
     private UsuarioServicio usuarioServicio;
-    private Conductor conductor;
+    private Conductor2 conductor;
     private String ciudad;
     private Ubicacion puntoPartida;
     private List<Ubicacion> puntosLlegada;
-    private Vehiculo vehiculo;
+    private Vehiculo2 vehiculo;
     private String horaInicio;
     private String horaFin;
     private float distanciaKm;
@@ -29,8 +29,8 @@ public class Servicio {
     private String restaurante;
     private String elemento;
 
-    Servicio(int id, String fecha, UsuarioServicio usuarioServicio, Conductor conductor, String ciudad, Ubicacion puntoPartida,
-        List<Ubicacion> puntosLlegada, Vehiculo vehiculo, String horaInicio, String horaFin, float distanciaKm, float comision, Integer valorTotal, String TipoServicio,
+    Servicio(int id, String fecha, UsuarioServicio usuarioServicio, Conductor2 conductor, String ciudad, Ubicacion puntoPartida,
+        List<Ubicacion> puntosLlegada, Vehiculo2 vehiculo, String horaInicio, String horaFin, float distanciaKm, float comision, Integer valorTotal, String TipoServicio,
         String nivel, String orden, String restaurante, String elemento){
             this.id=id;
             this.fecha=fecha;
@@ -77,11 +77,11 @@ public class Servicio {
         this.usuarioServicio = usuarioServicio;
     }
 
-    public Conductor getConductor() {
+    public Conductor2 getConductor() {
         return conductor;
     }
 
-    public void setConductor(Conductor conductor) {
+    public void setConductor(Conductor2 conductor) {
         this.conductor = conductor;
     }
 
@@ -109,11 +109,11 @@ public class Servicio {
         this.puntosLlegada = puntosLlegada;
     }
 
-    public Vehiculo getVehiculo() {
+    public Vehiculo2 getVehiculo() {
         return vehiculo;
     }
 
-    public void setVehiculo(Vehiculo vehiculo) {
+    public void setVehiculo(Vehiculo2 vehiculo) {
         this.vehiculo = vehiculo;
     }
 

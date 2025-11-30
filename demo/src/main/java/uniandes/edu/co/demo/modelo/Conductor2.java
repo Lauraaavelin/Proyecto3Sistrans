@@ -10,17 +10,17 @@ import lombok.ToString;
 
 @Document(collection="Conductor")
 @ToString
-public class Conductor {
+public class Conductor2 {
     
     private int id;
     private String nombre;
     private String celular;
     private String cedula;
     private String email;
-    private List<Vehiculo> vehiculos= new ArrayList<>();
+    private List<Vehiculo2> vehiculos= new ArrayList<>();
     private List<Disponibilidad> disponibilidades= new ArrayList<>();
     
-    public Conductor(int id, String nombre, String celular, String cedula, String email) {
+    public Conductor2(int id, String nombre, String celular, String cedula, String email) {
         this.id = id;
         this.nombre = nombre;
         this.celular = celular;
