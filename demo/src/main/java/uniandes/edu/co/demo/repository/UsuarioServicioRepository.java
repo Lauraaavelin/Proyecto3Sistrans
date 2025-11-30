@@ -1,5 +1,13 @@
 package uniandes.edu.co.demo.repository;
 
-public class UsuarioServicioRepository {
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.mongodb.repository.Update;
+
+import uniandes.edu.co.demo.modelo.UsuarioServicio;
+
+
+public interface UsuarioServicioRepository extends MongoRepository <UsuarioServicio, Integer> {
 
 }
