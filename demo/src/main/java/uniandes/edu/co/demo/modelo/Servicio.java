@@ -17,7 +17,7 @@ public class Servicio {
     private String ciudad;
     private Ubicacion puntoPartida;
     private List<Ubicacion> puntosLlegada;
-    private vehiculo vehiculo;
+    private Vehiculo vehiculo;
     private String horaInicio;
     private String horaFin;
     private float distanciaKm;
@@ -30,7 +30,7 @@ public class Servicio {
     private String elemento;
 
     Servicio(int id, String fecha, UsuarioServicio usuarioServicio, Conductor conductor, String ciudad, Ubicacion puntoPartida,
-        List<Ubicacion> puntosLlegada, vehiculo vehiculo, String horaInicio, String horaFin, float distanciaKm, float comision, Integer valorTotal, String TipoServicio,
+        List<Ubicacion> puntosLlegada, Vehiculo vehiculo, String horaInicio, String horaFin, float distanciaKm, float comision, Integer valorTotal, String TipoServicio,
         String nivel, String orden, String restaurante, String elemento){
             this.id=id;
             this.fecha=fecha;
@@ -109,11 +109,11 @@ public class Servicio {
         this.puntosLlegada = puntosLlegada;
     }
 
-    public vehiculo getVehiculo() {
+    public Vehiculo getVehiculo() {
         return vehiculo;
     }
 
-    public void setVehiculo(vehiculo vehiculo) {
+    public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
 
