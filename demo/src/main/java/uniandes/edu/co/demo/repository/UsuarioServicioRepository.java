@@ -10,4 +10,6 @@ import uniandes.edu.co.demo.modelo.UsuarioServicio;
 
 public interface UsuarioServicioRepository extends MongoRepository <UsuarioServicio, Integer> {
 
+  
+
 }
