@@ -29,10 +29,10 @@ public class Servicio {
     private String restaurante;
     private String elemento;
 
-    public Servicio( String fecha, UsuarioEnServicio usuarioServicio, UsuarioEnServicio conductor, String ciudad, Ubicacion puntoPartida,
+    public Servicio(int id, String fecha, UsuarioEnServicio usuarioServicio, UsuarioEnServicio conductor, String ciudad, Ubicacion puntoPartida,
         List<Ubicacion> puntosLlegada, Vehiculo2 vehiculo, String horaInicio, String horaFin, float distanciaKm, float comision, Integer valorTotal, String TipoServicio,
         String nivel, String orden, String restaurante, String elemento){
-            
+            this.id=id;
             this.fecha=fecha;
             this.usuarioServicio=usuarioServicio;
             this.conductor=conductor;

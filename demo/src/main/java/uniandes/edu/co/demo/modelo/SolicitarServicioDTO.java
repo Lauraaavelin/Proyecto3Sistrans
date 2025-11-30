@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SolicitarServicioDTO {
 
+    private int id;
     private int usuarioId;
     private String fecha;
     private Ubicacion puntoPartida;
@@ -18,9 +19,10 @@ public class SolicitarServicioDTO {
 
 
 
-    public SolicitarServicioDTO(int usuarioId, String fecha, Ubicacion puntoPartida, List<Ubicacion> puntoLlegada,
+    public SolicitarServicioDTO(int id,int usuarioId, String fecha, Ubicacion puntoPartida, List<Ubicacion> puntoLlegada,
             String ciudad, String tipoServicio, String orden, String restaurante, String elemento, String nivel,
             String horaInicio) {
+        this.id = id;
         this.usuarioId = usuarioId;
         this.fecha = fecha;
         this.puntoPartida = puntoPartida;
@@ -101,6 +103,18 @@ public class SolicitarServicioDTO {
     }
     public void setElemento(String elemento) {
         this.elemento = elemento;
+    }
+
+
+
+    public int getId() {
+        return id;
+    }
+
+
+
+    public void setId(int id) {
+        this.id = id;
     }
  
 
