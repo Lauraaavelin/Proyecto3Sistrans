@@ -1,6 +1,6 @@
 package uniandes.edu.co.demo.modelo;
 
-public class vehiculo {
+public class Vehiculo {
     private String placa;
     private String tipo;
     private String marca;
@@ -9,7 +9,7 @@ public class vehiculo {
     private String ciudadPlaca;
     private Integer capacidad;
 
-    public vehiculo(String placa, String tipo, String marca, String modelo, String color, String ciudadPlaca, Integer capacidad){
+    public Vehiculo(String placa, String tipo, String marca, String modelo, String color, String ciudadPlaca, Integer capacidad){
         this.placa=placa;
         this.tipo=tipo;
         this.marca=marca;
