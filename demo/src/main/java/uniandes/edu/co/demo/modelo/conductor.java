@@ -12,7 +12,7 @@ import lombok.ToString;
 
 @Document(collection="Conductor")
 @ToString
-public class conductor {
+public class Conductor {
 
     @Id
     private int id;
@@ -23,7 +23,7 @@ public class conductor {
     private List<vehiculo> vehiculos;
     private List<Disponibilidad> disponibilidad;
 
-    public conductor(int id, String nombre, String celular, String cedula, String email){
+    public Conductor(int id, String nombre, String celular, String cedula, String email){
         this.id=id;
         this.nombre=nombre;
         this.celular=celular;
