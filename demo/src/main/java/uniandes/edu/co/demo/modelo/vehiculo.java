@@ -8,9 +8,8 @@ public class vehiculo {
     private String color;
     private String ciudadPlaca;
     private Integer capacidad;
-    private String nivel;
 
-    public vehiculo(String placa, String tipo, String marca, String modelo, String color, String ciudadPlaca, Integer capacidad, String nivel){
+    public vehiculo(String placa, String tipo, String marca, String modelo, String color, String ciudadPlaca, Integer capacidad){
         this.placa=placa;
         this.tipo=tipo;
         this.marca=marca;
@@ -18,7 +17,7 @@ public class vehiculo {
         this.color=color;
         this.ciudadPlaca=ciudadPlaca;
         this.capacidad=capacidad;
-        this.nivel=nivel;
+     
     }
 
     public String getPlaca() {
@@ -49,9 +48,7 @@ public class vehiculo {
         return capacidad;
     }
 
-    public String getNivel() {
-        return nivel;
-    }
+   
 
     public void setPlaca(String placa) {
         this.placa = placa;
@@ -81,9 +78,7 @@ public class vehiculo {
         this.capacidad = capacidad;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
-    }
+    
 
     
 
