@@ -66,6 +66,7 @@ public class SeervicioService {
         Vehiculo2 vehiculo = conductorRepo.getVehiculoPorPlaca(placa);
 
         Servicio nuevoServicio = new Servicio( 
+         servicio.getId(),
          fecha,
          usu,
          cond,
