@@ -14,6 +14,9 @@ public class Disponibilidad {
     private String nivel;
     private String tipoServicio;
 
+    public Disponibilidad() {
+    }
+
     public Disponibilidad( boolean lunes, boolean martes, boolean miercoles, boolean jueves,
             boolean viernes, boolean sabado, boolean domingo, String horaInicio, String horaFin, String placa,
             String nivel, String tipoServicio) {
