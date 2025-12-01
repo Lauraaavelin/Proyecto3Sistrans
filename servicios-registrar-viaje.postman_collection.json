@@ -1,0 +1,118 @@
+{
+  "info": {
+    "_postman_id": "b7c9e210-0000-0000-0000-registrar-viaje",
+    "name": "Servicios - Registrar Viaje",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Registrar viaje - OK (Tipo T - Transporte)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 2001,\n  \"conductorId\": 1,\n  \"usuarioId\": 1,\n  \"placaVehiculo\": \"ABC123\",\n  \"fecha\": \"2025-11-30\",\n  \"ciudad\": \"Bogotá\",\n  \"puntoPartida\": {\n    \"direccion\": \"Cra 45 #10-28\",\n    \"lat\": 4.638,\n    \"lng\": -74.085\n  },\n  \"puntosLlegada\": [\n    {\n      \"direccion\": \"Cl 100 #15-20\",\n      \"lat\": 4.6761,\n      \"lng\": -74.048\n    }\n  ],\n  \"horaInicio\": \"08:00\",\n  \"horaFin\": \"08:30\",\n  \"distanciaKm\": 10.5,\n  \"comision\": 2500.0,\n  \"valorTotal\": 15000,\n  \"tipoServicio\": \"T\",\n  \"nivel\": \"Estandar\",\n  \"orden\": null,\n  \"restaurante\": null,\n  \"elemento\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{servicioBasePath}}/registrar-viaje",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{servicioBasePath}}",
+            "registrar-viaje"
+          ]
+        },
+        "description": "Registra un viaje de tipo Transporte (T).\n\nRequisitos:\n- Debe existir un conductor con id = 1.\n- Debe existir un UsuarioServicio con id = 1.\n- El conductor 1 debe tener un vehículo con placa \"ABC123\".\n- Horas en formato HH:mm."
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar viaje - Conductor no existe (404 esperado)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 2002,\n  \"conductorId\": 9999,\n  \"usuarioId\": 1,\n  \"placaVehiculo\": \"ABC123\",\n  \"fecha\": \"2025-11-30\",\n  \"ciudad\": \"Bogotá\",\n  \"puntoPartida\": {\n    \"direccion\": \"Cra 45 #10-28\",\n    \"lat\": 4.638,\n    \"lng\": -74.085\n  },\n  \"puntosLlegada\": [\n    {\n      \"direccion\": \"Cl 100 #15-20\",\n      \"lat\": 4.6761,\n      \"lng\": -74.048\n    }\n  ],\n  \"horaInicio\": \"08:00\",\n  \"horaFin\": \"08:30\",\n  \"distanciaKm\": 10.5,\n  \"comision\": 2500.0,\n  \"valorTotal\": 15000,\n  \"tipoServicio\": \"T\",\n  \"nivel\": \"Estandar\",\n  \"orden\": null,\n  \"restaurante\": null,\n  \"elemento\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{servicioBasePath}}/registrar-viaje",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{servicioBasePath}}",
+            "registrar-viaje"
+          ]
+        },
+        "description": "Prueba el caso en que el conductor NO existe (conductorId = 9999). Debe responder 404 NOT_FOUND con el mensaje correspondiente."
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar viaje - Vehículo no pertenece al conductor (400 esperado)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 2003,\n  \"conductorId\": 1,\n  \"usuarioId\": 1,\n  \"placaVehiculo\": \"ZZZ999\",\n  \"fecha\": \"2025-11-30\",\n  \"ciudad\": \"Bogotá\",\n  \"puntoPartida\": {\n    \"direccion\": \"Cra 45 #10-28\",\n    \"lat\": 4.638,\n    \"lng\": -74.085\n  },\n  \"puntosLlegada\": [\n    {\n      \"direccion\": \"Cl 100 #15-20\",\n      \"lat\": 4.6761,\n      \"lng\": -74.048\n    }\n  ],\n  \"horaInicio\": \"08:00\",\n  \"horaFin\": \"08:30\",\n  \"distanciaKm\": 10.5,\n  \"comision\": 2500.0,\n  \"valorTotal\": 15000,\n  \"tipoServicio\": \"T\",\n  \"nivel\": \"Estandar\",\n  \"orden\": null,\n  \"restaurante\": null,\n  \"elemento\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{servicioBasePath}}/registrar-viaje",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{servicioBasePath}}",
+            "registrar-viaje"
+          ]
+        },
+        "description": "Prueba el caso en que la placa indicada no pertenece al conductor (placaVehiculo = \"ZZZ999\"). Debe responder 400 BAD_REQUEST con el mensaje \"No se encontró un vehículo con la placa indicada para el conductor\"."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "servicioBasePath",
+      "value": "servicios"
+    }
+  ]
+}

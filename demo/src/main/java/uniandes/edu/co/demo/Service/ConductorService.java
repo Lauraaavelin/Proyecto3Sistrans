@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import uniandes.edu.co.demo.modelo.Conductor2;
 import uniandes.edu.co.demo.modelo.Disponibilidad;
 import uniandes.edu.co.demo.repository.ConductorRepository;
 
+@Service
 public class ConductorService {
 
     @Autowired

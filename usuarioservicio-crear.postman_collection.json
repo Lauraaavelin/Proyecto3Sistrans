@@ -1,0 +1,76 @@
+{
+  "info": {
+    "_postman_id": "a2b6b1f2-0000-0000-0000-usuario-servicio-crear",
+    "name": "UsuarioServicio - Crear",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Registrar UsuarioServicio",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"numeroTarjeta\": \"4111111111111111\",\n  \"nombre\": \"Laura Pérez\",\n  \"fechaExpiracion\": \"12/28\",\n  \"codigoSeguridad\": \"123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/{{usuarioServicioBasePath}}/crear?id=1&nombre=Laura%20P%C3%A9rez&celular=3001234567&cedula=123456789&email=laura.perez%40example.com",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{usuarioServicioBasePath}}",
+            "crear"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            },
+            {
+              "key": "nombre",
+              "value": "Laura Pérez"
+            },
+            {
+              "key": "celular",
+              "value": "3001234567"
+            },
+            {
+              "key": "cedula",
+              "value": "123456789"
+            },
+            {
+              "key": "email",
+              "value": "laura.perez@example.com"
+            }
+          ]
+        },
+        "description": "Llama a POST /{basePath}/crear enviando los @RequestParam en la query y la tarjeta en el body."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "usuarioServicioBasePath",
+      "value": "usuarios-servicio"
+    }
+  ]
+}
+
+

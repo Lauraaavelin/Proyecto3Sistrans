@@ -1,0 +1,81 @@
+{
+  "info": {
+    "_postman_id": "f2b7e210-0000-0000-0000-solicitar-servicio",
+    "name": "UsuarioServicio - Solicitar Servicio",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Solicitar servicio - OK (Transporte T)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1234,\n  \"usuarioId\": 1,\n  \"ciudad\": \"Bogotá\",\n  \"puntoPartida\": {\n    \"direccion\": \"Cra 45 #10-28\",\n    \"lat\": 4.638,\n    \"lng\": -74.085\n  },\n  \"puntoLlegada\": {\n    \"direccion\": \"Cl 100 #15-20\",\n    \"lat\": 4.6761,\n    \"lng\": -74.048\n  },\n  \"tipoServicio\": \"T\",\n  \"nivel\": \"Estandar\",\n  \"orden\": null,\n  \"restaurante\": null,\n  \"elemento\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/usuarios-servicio/solicitar-servicio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "usuarios-servicio",
+            "solicitar-servicio"
+          ]
+        },
+        "description": "Solicita un servicio para el usuario con id=1. Requiere que exista el UsuarioServicio con id=1 y que el SeervicioService pueda encontrar un conductor disponible."
+      },
+      "response": []
+    },
+    {
+      "name": "Solicitar servicio - Usuario no existe (esperado error interno o fallo de lógica)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1235,\n  \"usuarioId\": 9999,\n  \"ciudad\": \"Bogotá\",\n  \"puntoPartida\": {\n    \"direccion\": \"Cra 45 #10-28\",\n    \"lat\": 4.638,\n    \"lng\": -74.085\n  },\n  \"puntoLlegada\": {\n    \"direccion\": \"Cl 100 #15-20\",\n    \"lat\": 4.6761,\n    \"lng\": -74.048\n  },\n  \"tipoServicio\": \"T\",\n  \"nivel\": \"Estandar\",\n  \"orden\": null,\n  \"restaurante\": null,\n  \"elemento\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/usuarios-servicio/solicitar-servicio",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "usuarios-servicio",
+            "solicitar-servicio"
+          ]
+        },
+        "description": "Prueba qué pasa cuando el usuarioId no existe en la base de datos (depende de la implementación de usuarioRepo.getById)."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

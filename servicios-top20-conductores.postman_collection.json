@@ -1,0 +1,43 @@
+{
+  "info": {
+    "_postman_id": "f3a7d210-0000-0000-0000-top20-conductores",
+    "name": "Servicios - RFC2 Top 20 Conductores",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "RFC2 - Top 20 conductores por número de servicios",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/{{servicioBasePath}}/top20-conductores",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{servicioBasePath}}",
+            "top20-conductores"
+          ]
+        },
+        "description": "RFC2: TOP 20 CONDUCTORES QUE MÁS SERVICIOS HAN PRESTADO.\n\nLlama a servicioRepoCustom.obtenerTop20Conductores(), que ejecuta un pipeline de agregación sobre la colección Servicio:\n- $group por conductor.id\n- $sort por totalServicios desc\n- $limit 20\n- $lookup para traer info del conductor desde colección Conductor."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "servicioBasePath",
+      "value": "servicios"
+    }
+  ]
+}

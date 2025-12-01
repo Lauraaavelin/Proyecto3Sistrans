@@ -1,0 +1,121 @@
+{
+  "info": {
+    "_postman_id": "f8c9e210-0000-0000-0000-disponibilidad-conductor",
+    "name": "Conductor - Registrar Disponibilidad",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Registrar disponibilidad - OK (T - Transporte)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"lunes\": true,\n  \"martes\": true,\n  \"miercoles\": false,\n  \"jueves\": false,\n  \"viernes\": false,\n  \"sabado\": false,\n  \"domingo\": false,\n  \"horaInicio\": \"08:00\",\n  \"horaFin\": \"12:00\",\n  \"placa\": \"ABC123\",\n  \"tipoServicio\": \"T\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/{{conductorId}}/disponibilidades",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "{{conductorId}}",
+            "disponibilidades"
+          ]
+        },
+        "description": "Registra una disponibilidad de lunes y martes de 08:00 a 12:00 para el vehículo con placa ABC123 y tipo de servicio T (Transporte).\n\nRequisitos para que funcione:\n- Debe existir un conductor con id = {{conductorId}}.\n- Ese conductor debe tener un vehículo con placa \"ABC123\" en su lista de vehiculos.\n- El formato de hora es HH:mm."
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar disponibilidad - Conductor no existe (404)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"lunes\": true,\n  \"martes\": false,\n  \"miercoles\": false,\n  \"jueves\": false,\n  \"viernes\": false,\n  \"sabado\": false,\n  \"domingo\": false,\n  \"horaInicio\": \"08:00\",\n  \"horaFin\": \"12:00\",\n  \"placa\": \"ABC123\",\n  \"tipoServicio\": \"T\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/9999/disponibilidades",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "9999",
+            "disponibilidades"
+          ]
+        },
+        "description": "Prueba el caso en el que el conductor no existe. Debe devolver 404 NOT_FOUND con el mensaje \"No se encontró un conductor con el identificador proporcionado\"."
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar disponibilidad - Sin días seleccionados (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"lunes\": false,\n  \"martes\": false,\n  \"miercoles\": false,\n  \"jueves\": false,\n  \"viernes\": false,\n  \"sabado\": false,\n  \"domingo\": false,\n  \"horaInicio\": \"08:00\",\n  \"horaFin\": \"12:00\",\n  \"placa\": \"ABC123\",\n  \"tipoServicio\": \"T\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/{{conductorId}}/disponibilidades",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "{{conductorId}}",
+            "disponibilidades"
+          ]
+        },
+        "description": "Ningún día está en true. Debe devolver 400 BAD_REQUEST con el mensaje \"Debe seleccionar al menos un día para la disponibilidad\"."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "conductorId",
+      "value": "1"
+    }
+  ]
+}

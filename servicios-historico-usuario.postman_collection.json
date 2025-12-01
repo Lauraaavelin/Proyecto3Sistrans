@@ -1,0 +1,73 @@
+{
+  "info": {
+    "_postman_id": "e9d3a210-0000-0000-0000-historico-servicios",
+    "name": "Servicios - Histórico por Usuario (RFC1)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Histórico de servicios - Usuario existente",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/{{servicioBasePath}}/historico/{{usuarioId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{servicioBasePath}}",
+            "historico",
+            "{{usuarioId}}"
+          ]
+        },
+        "description": "Obtiene el histórico de servicios pedidos por el usuario con id {{usuarioId}}.\n\nEste endpoint llama a servicioRepoCustom.obtenerHistoricoServiciosUsuario(idUsuario) y devuelve una lista de Document (JSON)."
+      },
+      "response": []
+    },
+    {
+      "name": "Histórico de servicios - Usuario sin servicios o inexistente",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/{{servicioBasePath}}/historico/9999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{servicioBasePath}}",
+            "historico",
+            "9999"
+          ]
+        },
+        "description": "Prueba la consulta con un id de usuario (9999) que probablemente no tenga servicios. Según cómo esté implementado obtenerHistoricoServiciosUsuario, puede devolver lista vacía []."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "servicioBasePath",
+      "value": "servicios"
+    },
+    {
+      "key": "usuarioId",
+      "value": "1"
+    }
+  ]
+}

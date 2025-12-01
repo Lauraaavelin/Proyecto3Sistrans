@@ -1,0 +1,79 @@
+{
+  "info": {
+    "_postman_id": "c3a9b7f0-0000-0000-0000-registrar-conductor",
+    "name": "Conductor - Registrar",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Registrar Conductor - OK",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"nombre\": \"Pedro Sánchez\",\n  \"celular\": \"3101112233\",\n  \"cedula\": \"80012345\",\n  \"email\": \"pedro.sanchez@example.com\",\n  \"vehiculos\": [],\n  \"disponibilidades\": [],\n  \"enServicio\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores"
+          ]
+        },
+        "description": "Registra un nuevo conductor. Si el id ya existe, el endpoint debe devolver 409 CONFLICT."
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar Conductor - Id duplicado (debe dar 409)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"nombre\": \"Pedro Sánchez\",\n  \"celular\": \"3101112233\",\n  \"cedula\": \"80012345\",\n  \"email\": \"pedro.sanchez@example.com\",\n  \"vehiculos\": [],\n  \"disponibilidades\": [],\n  \"enServicio\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores"
+          ]
+        },
+        "description": "Ejecuta primero 'Registrar Conductor - OK' y luego esta para probar la respuesta 409 cuando el id ya existe."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

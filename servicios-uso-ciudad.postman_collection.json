@@ -1,0 +1,95 @@
+{
+  "info": {
+    "_postman_id": "a4c7d210-0000-0000-0000-uso-servicios-ciudad",
+    "name": "Servicios - RFC3 Uso por Ciudad y Fechas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "RFC3 - Uso de servicios (Bogotá, noviembre 2025)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/{{servicioBasePath}}/uso?ciudad=Bogotá&fechaInicio=2025-11-01&fechaFin=2025-11-30",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{servicioBasePath}}",
+            "uso"
+          ],
+          "query": [
+            {
+              "key": "ciudad",
+              "value": "Bogotá"
+            },
+            {
+              "key": "fechaInicio",
+              "value": "2025-11-01"
+            },
+            {
+              "key": "fechaFin",
+              "value": "2025-11-30"
+            }
+          ]
+        },
+        "description": "RFC3: Uso de servicios por ciudad y rango de fechas.\n\nLlama a servicioRepoCustom.obtenerUsoServiciosCiudad(\"Bogotá\", \"2025-11-01\", \"2025-11-30\").\nAjusta las fechas al formato que espera tu consulta (por ejemplo YYYY-MM-DD)."
+      },
+      "response": []
+    },
+    {
+      "name": "RFC3 - Uso de servicios (otra ciudad, rango vacío o sin datos)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/{{servicioBasePath}}/uso?ciudad=Medellín&fechaInicio=2025-01-01&fechaFin=2025-01-31",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "{{servicioBasePath}}",
+            "uso"
+          ],
+          "query": [
+            {
+              "key": "ciudad",
+              "value": "Medellín"
+            },
+            {
+              "key": "fechaInicio",
+              "value": "2025-01-01"
+            },
+            {
+              "key": "fechaFin",
+              "value": "2025-01-31"
+            }
+          ]
+        },
+        "description": "Prueba el endpoint con otra ciudad y rango de fechas diferente.\nSegún los datos de tu colección Servicio, puede devolver resultados o una lista vacía []."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "servicioBasePath",
+      "value": "servicios"
+    }
+  ]
+}

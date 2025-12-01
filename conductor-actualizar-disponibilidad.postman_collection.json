@@ -1,0 +1,128 @@
+{
+  "info": {
+    "_postman_id": "d8c7e210-0000-0000-0000-actualizar-disponibilidad",
+    "name": "Conductor - Actualizar Disponibilidad",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Actualizar disponibilidad - OK (T - Transporte)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"lunes\": true,\n  \"martes\": false,\n  \"miercoles\": true,\n  \"jueves\": false,\n  \"viernes\": false,\n  \"sabado\": false,\n  \"domingo\": false,\n  \"horaInicio\": \"09:00\",\n  \"horaFin\": \"13:00\",\n  \"placa\": \"ABC123\",\n  \"tipoServicio\": \"T\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/{{conductorId}}/disponibilidades/{{indice}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "{{conductorId}}",
+            "disponibilidades",
+            "{{indice}}"
+          ]
+        },
+        "description": "Actualiza la disponibilidad en la posición {{indice}} para el conductor {{conductorId}}.\nRequisitos:\n- Debe existir el conductor con id = {{conductorId}}.\n- Debe existir una disponibilidad en ese índice (0-based).\n- El conductor debe tener un vehículo con placa \"ABC123\".\n- tipoServicio debe ser T/D/M.\n- horaInicio y horaFin en formato HH:mm, y horaInicio < horaFin."
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar disponibilidad - Conductor no existe (404 esperado)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"lunes\": true,\n  \"martes\": false,\n  \"miercoles\": false,\n  \"jueves\": false,\n  \"viernes\": false,\n  \"sabado\": false,\n  \"domingo\": false,\n  \"horaInicio\": \"08:00\",\n  \"horaFin\": \"12:00\",\n  \"placa\": \"ABC123\",\n  \"tipoServicio\": \"T\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/9999/disponibilidades/0",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "9999",
+            "disponibilidades",
+            "0"
+          ]
+        },
+        "description": "Prueba el caso donde el conductor no existe (id = 9999). Debe devolver 404 con el mensaje de conductor no encontrado."
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar disponibilidad - Índice fuera de rango (404 esperado)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"lunes\": true,\n  \"martes\": true,\n  \"miercoles\": false,\n  \"jueves\": false,\n  \"viernes\": false,\n  \"sabado\": false,\n  \"domingo\": false,\n  \"horaInicio\": \"08:00\",\n  \"horaFin\": \"12:00\",\n  \"placa\": \"ABC123\",\n  \"tipoServicio\": \"T\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/{{conductorId}}/disponibilidades/99",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "{{conductorId}}",
+            "disponibilidades",
+            "99"
+          ]
+        },
+        "description": "Prueba un índice fuera de rango (p.ej., 99) para un conductor que sí existe. Debe devolver 404 \"No se encontró la disponibilidad solicitada para el conductor\"."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "conductorId",
+      "value": "1"
+    },
+    {
+      "key": "indice",
+      "value": "0"
+    }
+  ]
+}

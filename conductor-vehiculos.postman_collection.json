@@ -1,0 +1,121 @@
+{
+  "info": {
+    "_postman_id": "d6e8b86a-0000-0000-0000-vehiculos-endpoint",
+    "name": "Conductor - Registrar Vehículo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Registrar vehículo - OK",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"placa\": \"JKL123\",\n  \"tipo\": \"Carro\",\n  \"marca\": \"Mazda\",\n  \"modelo\": \"3\",\n  \"color\": \"Rojo\",\n  \"ciudadPlaca\": \"Bogotá\",\n  \"capacidad\": 5\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/{{conductorId}}/vehiculos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "{{conductorId}}",
+            "vehiculos"
+          ]
+        },
+        "description": "Registra un vehículo nuevo para el conductor indicado por `conductorId`."
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar vehículo - Conductor no existe",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"placa\": \"ZZZ999\",\n  \"tipo\": \"Carro\",\n  \"marca\": \"Chevrolet\",\n  \"modelo\": \"Sail\",\n  \"color\": \"Blanco\",\n  \"ciudadPlaca\": \"Bogotá\",\n  \"capacidad\": 4\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/9999/vehiculos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "9999",
+            "vehiculos"
+          ]
+        },
+        "description": "Prueba el caso en el que el conductor no existe (debería devolver 404)."
+      },
+      "response": []
+    },
+    {
+      "name": "Registrar vehículo - Placa duplicada",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"placa\": \"JKL123\",\n  \"tipo\": \"Carro\",\n  \"marca\": \"Mazda\",\n  \"modelo\": \"3\",\n  \"color\": \"Rojo\",\n  \"ciudadPlaca\": \"Bogotá\",\n  \"capacidad\": 5\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/conductores/{{conductorId}}/vehiculos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "conductores",
+            "{{conductorId}}",
+            "vehiculos"
+          ]
+        },
+        "description": "Ejecuta primero la petición 'Registrar vehículo - OK' y luego esta para probar el 409 por placa duplicada."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "conductorId",
+      "value": "1"
+    }
+  ]
+}
