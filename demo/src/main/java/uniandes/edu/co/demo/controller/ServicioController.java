@@ -24,12 +24,15 @@ import uniandes.edu.co.demo.repository.ServicioRepository;
 public class ServicioController {
 
     private final Consultas servicioRepoCustom;
-    private ConductorRepository conductorRepository;
-    private UsuarioServicioRepository usuarioServicioRepository;
-    private ServicioRepository servicioRepository;
+    private final ConductorRepository conductorRepository;
+    private final UsuarioServicioRepository usuarioServicioRepository;
+    private final ServicioRepository servicioRepository;
 
-    public ServicioController(Consultas servicioRepoCustom) {
+    public ServicioController(Consultas servicioRepoCustom, ConductorRepository conductorRepository, UsuarioServicioRepository usuarioServicioRepository, ServicioRepository servicioRepository) {
         this.servicioRepoCustom = servicioRepoCustom;
+        this.conductorRepository=conductorRepository;
+        this.usuarioServicioRepository=usuarioServicioRepository;
+        this.servicioRepository=servicioRepository;
     }
 
     // --------------------------------------------------------------
