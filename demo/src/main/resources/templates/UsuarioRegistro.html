@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Usuario Servicio</title>
+</head>
+<body>
+    <h2>Crear cuenta de Usuario Servicio</h2>
+
+    <form action="/UsuarioServicio/Registro" method="post">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required><br>
+
+        <label>Correo:</label>
+        <input type="email" name="correo" required><br>
+
+        <label>Teléfono:</label>
+        <input type="text" name="telefono" required><br>
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <a href="/Menu">Volver al menú</a>
+</body>
+</html>
