@@ -12,7 +12,7 @@
 
     <p>Su ID es: <strong><span th:text="${id}"></span></strong></p>
 
-    <h3>Vehículos registrados</h3>
+    <h5>Vehículos registrados</h5>
 
 <!-- Si está vacía -->
 <p th:if="${vehiculos == null or #lists.isEmpty(vehiculos)}">
@@ -47,7 +47,7 @@
     </a>
     <br><br>
     <br>
-    <h3>Disponibilidades registradas</h3>
+    <h5>Disponibilidades registradas</h5>
 
 <!-- Si no tiene ninguna -->
 <p th:if="${disponibilidades == null or #lists.isEmpty(disponibilidades)}">
@@ -55,7 +55,7 @@
 </p>
 
 <!-- Si sí tiene -->
-<table th:if="${disponibilidades != null and !#lists.isEmpty(disponibilidades)}" border="1" cellpadding="5">
+<table class="table table-bordered" th:if="${disponibilidades != null and !#lists.isEmpty(disponibilidades)}" border="1" cellpadding="5">
     <tr>
         <th>Días</th>
         <th>Hora Inicio</th>
@@ -63,9 +63,10 @@
         <th>Placa</th>
         <th>Nivel</th>
         <th>Tipo Servicio</th>
+        <th>Acciones</th>
     </tr>
 
-    <tr th:each="d : ${disponibilidades}">
+    <tr th:each="d,  iterStat : ${disponibilidades}">
         <td>
             <span th:if="${d.lunes}">Lunes </span>
             <span th:if="${d.martes}">Martes </span>
@@ -74,6 +75,7 @@
             <span th:if="${d.viernes}">Viernes </span>
             <span th:if="${d.sabado}">Sábado </span>
             <span th:if="${d.domingo}">Domingo </span>
+            
         </td>
 
         <td th:text="${d.horaInicio}"></td>
@@ -81,6 +83,12 @@
         <td th:text="${d.placa}"></td>
         <td th:text="${d.nivel}"></td>
         <td th:text="${d.tipoServicio}"></td>
+         <td>
+            <a th:href="@{'/Conductor/' + ${id} + '/disponibilidades/editar/' + ${iterStat.index}}" 
+               class="btn btn-primary btn-sm">
+                Editar
+            </a>
+        </td>
     </tr>
 </table>
 <br>

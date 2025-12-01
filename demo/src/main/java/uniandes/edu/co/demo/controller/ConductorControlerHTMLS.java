@@ -222,7 +222,7 @@ public String guardarDisponibilidad(
     conductor.getDisponibilidades().add(nueva);
     
     conductorRepository.agregarDisponibilidadAConductor(conductor.getId(), nueva);
-    model.addAttribute("id", conductor.getId());
+    
     return "redirect:/Conductor/Inicio/" + id;
 }
 
@@ -262,4 +262,154 @@ public String guardarDisponibilidad(
         return dto.isLunes() || dto.isMartes() || dto.isMiercoles() || dto.isJueves()
                 || dto.isViernes() || dto.isSabado() || dto.isDomingo();
     }
+
+
+
+
+
+
+
+    @GetMapping("/{conductorId}/Disponibilidades/Editar/{indice}")
+public String mostrarFormularioEditarDisponibilidad(
+        @PathVariable int conductorId,
+        @PathVariable int indice,
+        Model model) {
+
+    var conductorOpt = conductorRepository.findById(conductorId);
+    if (conductorOpt.isEmpty()) {
+        model.addAttribute("error", "Conductor no encontrado");
+        return "Error";
+    }
+
+    Conductor2 conductor = conductorOpt.get();
+
+    if (indice < 0 || indice >= conductor.getDisponibilidades().size()) {
+        model.addAttribute("error", "Índice de disponibilidad no válido");
+        return "Error";
+    }
+
+    Disponibilidad disponibilidad = conductor.getDisponibilidades().get(indice);
+
+    // Llenamos el DTO con los valores almacenados
+    RegistrarDisponibilidadDTO dto = new RegistrarDisponibilidadDTO();
+    dto.setLunes(disponibilidad.isLunes());
+    dto.setMartes(disponibilidad.isMartes());
+    dto.setMiercoles(disponibilidad.isMiercoles());
+    dto.setJueves(disponibilidad.isJueves());
+    dto.setViernes(disponibilidad.isViernes());
+    dto.setSabado(disponibilidad.isSabado());
+    dto.setDomingo(disponibilidad.isDomingo());
+    dto.setHoraInicio(disponibilidad.getHoraInicio());
+    dto.setHoraFin(disponibilidad.getHoraFin());
+    dto.setPlaca(disponibilidad.getPlaca());
+    dto.setTipoServicio(disponibilidad.getTipoServicio());
+
+    model.addAttribute("disponibilidad", dto);
+    model.addAttribute("conductorId", conductorId);
+    model.addAttribute("indice", indice);
+    model.addAttribute("vehiculos", conductor.getVehiculos());
+
+    return "EditarDisponibilidad";
+}
+
+
+
+@PostMapping("/{conductorId}/Disponibilidades/Editar/{indice}")
+public String actualizarDisponibilidad(
+        @PathVariable int conductorId,
+        @PathVariable int indice,
+        @ModelAttribute RegistrarDisponibilidadDTO dto,
+        Model model) {
+
+    var conductorOpt = conductorRepository.findById(conductorId);
+    if (conductorOpt.isEmpty()) {
+        model.addAttribute("error", "Conductor no encontrado");
+        return "Error";
+    }
+
+    Conductor2 conductor = conductorOpt.get();
+
+    if (indice < 0 || indice >= conductor.getDisponibilidades().size()) {
+        model.addAttribute("error", "Disponibilidad no encontrada");
+        return "Error";
+    }
+
+    // Validar tipo de servicio
+    String tipoServicio = dto.getTipoServicio();
+    if (tipoServicio == null || !"TDM".contains(tipoServicio.toUpperCase()) || tipoServicio.length() != 1) {
+        model.addAttribute("error", "El tipo de servicio debe ser T, D o M");
+        return "Error";
+    }
+
+    if (!tieneDiaSeleccionado(dto)) {
+        model.addAttribute("error", "Debe seleccionar al menos un día");
+        return "Error";
+    }
+
+    LocalTime horaInicio;
+    LocalTime horaFin;
+    try {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        horaInicio = LocalTime.parse(dto.getHoraInicio(), formatter);
+        horaFin = LocalTime.parse(dto.getHoraFin(), formatter);
+    } catch (Exception e) {
+        model.addAttribute("error", "Formato de hora inválido");
+        return "Error";
+    }
+
+    if (!horaInicio.isBefore(horaFin)) {
+        model.addAttribute("error", "La hora de inicio debe ser anterior a la hora de fin");
+        return "Error";
+    }
+
+    // Validar placa
+    Vehiculo2 vehiculo = conductor.getVehiculos().stream()
+            .filter(v -> v.getPlaca().equalsIgnoreCase(dto.getPlaca()))
+            .findFirst()
+            .orElse(null);
+
+    if (vehiculo == null) {
+        model.addAttribute("error", "La placa indicada no pertenece al conductor");
+        return "Error";
+    }
+
+    // Determinar nivel
+    String nivel = tipoServicio.equals("T")
+            ? determinarNivel(vehiculo)
+            : null;
+
+    // Crear nueva disponibilidad
+    Disponibilidad actualizada = new Disponibilidad(
+            dto.isLunes(),
+            dto.isMartes(),
+            dto.isMiercoles(),
+            dto.isJueves(),
+            dto.isViernes(),
+            dto.isSabado(),
+            dto.isDomingo(),
+            dto.getHoraInicio(),
+            dto.getHoraFin(),
+            dto.getPlaca(),
+            nivel,
+            tipoServicio);
+
+    // Validar superposición excepto con la que se está editando
+    for (int i = 0; i < conductor.getDisponibilidades().size(); i++) {
+        if (i == indice) continue;
+
+        if (seSuperpone(actualizada, conductor.getDisponibilidades().get(i))) {
+            model.addAttribute("error", "La disponibilidad se superpone con otra existente");
+            return "Error";
+        }
+    }
+
+    // Remplazar la disponibilidad
+    conductor.getDisponibilidades().set(indice, actualizada);
+    conductorRepository.save(conductor);
+
+    return "redirect:/Conductor/Inicio/" + conductorId;
+}
+
+
+
 }
