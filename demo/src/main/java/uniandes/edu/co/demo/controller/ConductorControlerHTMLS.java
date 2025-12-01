@@ -222,7 +222,7 @@ public String guardarDisponibilidad(
     conductor.getDisponibilidades().add(nueva);
     
     conductorRepository.agregarDisponibilidadAConductor(conductor.getId(), nueva);
-
+    model.addAttribute("id", conductor.getId());
     return "redirect:/Conductor/Inicio/" + id;
 }
 

@@ -1,13 +1,13 @@
 package uniandes.edu.co.demo.modelo;
 
 public class Disponibilidad {
-    private boolean Lunes;
-    private boolean Martes;
-    private boolean Miercoles;
-    private boolean Jueves;
-    private boolean Viernes;    
-    private boolean Sabado;
-    private boolean Domingo;
+    private boolean lunes;
+    private boolean martes;
+    private boolean miercoles;
+    private boolean jueves;
+    private boolean viernes;    
+    private boolean sabado;
+    private boolean domingo;
     private String horaInicio;
     private String horaFin;
     private String placa;
@@ -17,77 +17,67 @@ public class Disponibilidad {
     public Disponibilidad( boolean lunes, boolean martes, boolean miercoles, boolean jueves,
             boolean viernes, boolean sabado, boolean domingo, String horaInicio, String horaFin, String placa,
             String nivel, String tipoServicio) {
-        Lunes = lunes;
-        Martes = martes;
-        Miercoles = miercoles;
-        Jueves = jueves;
-        Viernes = viernes;
-        Sabado = sabado;
-        Domingo = domingo;
+        this.lunes = lunes;
+        this.martes = martes;
+        this.miercoles = miercoles; 
+        this.jueves = jueves;
+        this.viernes = viernes;
+        this.sabado = sabado;
+        this.domingo = domingo;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.placa = placa;
         this.nivel = nivel;
         this.tipoServicio = tipoServicio;
     }
-    
+
+    public Disponibilidad() {
+    }
+
 
     public boolean isLunes() {
-        return Lunes;
-    }
-
+        return lunes;
+    }   
     public void setLunes(boolean lunes) {
-        Lunes = lunes;
+        this.lunes = lunes;
     }
-
+    
     public boolean isMartes() {
-        return Martes;
+        return martes;
     }
-
     public void setMartes(boolean martes) {
-        Martes = martes;
+        this.martes = martes;
     }
-
     public boolean isMiercoles() {
-        return Miercoles;
+        return miercoles;
     }
-
     public void setMiercoles(boolean miercoles) {
-        Miercoles = miercoles;
+        this.miercoles = miercoles;
     }
-
     public boolean isJueves() {
-        return Jueves;
+        return jueves;
     }
-
     public void setJueves(boolean jueves) {
-        Jueves = jueves;
+        this.jueves = jueves;
     }
-
     public boolean isViernes() {
-        return Viernes;
+        return viernes;
     }
-
     public void setViernes(boolean viernes) {
-        Viernes = viernes;
+        this.viernes = viernes;
     }
-
     public boolean isSabado() {
-        return Sabado;
+        return sabado;
     }
-
     public void setSabado(boolean sabado) {
-        Sabado = sabado;
+        this.sabado = sabado;
     }
-
     public boolean isDomingo() {
-        return Domingo;
+        return domingo;
     }
-
     public void setDomingo(boolean domingo) {
-        Domingo = domingo;
+        this.domingo = domingo;
     }
-
     public String getHoraInicio() {
         return horaInicio;
     }

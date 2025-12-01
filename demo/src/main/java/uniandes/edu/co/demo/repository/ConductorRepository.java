@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.Update;
 
 import uniandes.edu.co.demo.modelo.Conductor2;
+import uniandes.edu.co.demo.modelo.Disponibilidad;
 import uniandes.edu.co.demo.modelo.Vehiculo2;
 
 public interface ConductorRepository extends MongoRepository <Conductor2, Integer> {
@@ -26,5 +27,8 @@ public interface ConductorRepository extends MongoRepository <Conductor2, Intege
     @Update("{ $push: { vehiculos: ?1 } }")
     void agregarVehiculoAConductor(int id, Vehiculo2 vehiculo);
     
+    @Query("{ _id: ?0 }")
+    @Update("{ $push: { disponibilidades: ?1 } }")
+    void agregarDisponibilidadAConductor(int id, Disponibilidad disponibilidad);
     
 }

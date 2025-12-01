@@ -4,7 +4,7 @@
     <p style="color:red" th:text="${error}"></p>
 </div>
 
-<form th:action="@{'/Conductor/guardarDisponibilidad/{conductor.id}"
+<form th:action="@{/Conductor/guardarDisponibilidad/{id}(id=${conductor.id})}"
       method="post"
       th:object="${disponibilidad}">
 
@@ -44,5 +44,4 @@
     <br><br>
 
     <button type="submit">Guardar</button>
-    <br>
 </form>
