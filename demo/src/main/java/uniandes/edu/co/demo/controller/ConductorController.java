@@ -18,6 +18,7 @@ import uniandes.edu.co.demo.modelo.RegistrarDisponibilidadDTO;
 import uniandes.edu.co.demo.modelo.RegistrarVehiculoDTO;
 import uniandes.edu.co.demo.modelo.Vehiculo2;
 import uniandes.edu.co.demo.repository.ConductorRepository;
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
@@ -192,6 +193,102 @@ public class ConductorController {
             return "Confort";
         }
         return "Estandar";
+    }
+
+    
+    @PutMapping("/{conductorId}/disponibilidades/{indice}")
+    public ResponseEntity<?> actualizarDisponibilidad(@PathVariable int conductorId, @PathVariable int indice,
+            @RequestBody RegistrarDisponibilidadDTO disponibilidadDTO) {
+
+        var conductorOpt = conductorRepository.findById(conductorId);
+        if (conductorOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontró un conductor con el identificador proporcionado");
+        }
+
+        Conductor2 conductor = conductorOpt.get();
+        if (indice < 0 || indice >= conductor.getDisponibilidades().size()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontró la disponibilidad solicitada para el conductor");
+        }
+
+        String tipoServicio = disponibilidadDTO.getTipoServicio();
+        if (tipoServicio == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("El tipo de servicio debe ser T, D o M");
+        }
+
+        tipoServicio = tipoServicio.toUpperCase();
+        if (!"TDM".contains(tipoServicio) || tipoServicio.length() != 1) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("El tipo de servicio debe ser T, D o M");
+        }
+
+        if (!tieneDiaSeleccionado(disponibilidadDTO)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Debe seleccionar al menos un día para la disponibilidad");
+        }
+
+        LocalTime horaInicio;
+        LocalTime horaFin;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            horaInicio = LocalTime.parse(disponibilidadDTO.getHoraInicio(), formatter);
+            horaFin = LocalTime.parse(disponibilidadDTO.getHoraFin(), formatter);
+        } catch (DateTimeParseException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("El formato de hora debe ser HH:mm");
+        }
+
+        if (!horaInicio.isBefore(horaFin)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("La hora de inicio debe ser anterior a la hora de fin");
+        }
+
+        Vehiculo2 vehiculo = conductor.getVehiculos().stream()
+                .filter(v -> v.getPlaca() != null && disponibilidadDTO.getPlaca() != null
+                        && v.getPlaca().equalsIgnoreCase(disponibilidadDTO.getPlaca()))
+                .findFirst()
+                .orElse(null);
+
+        if (vehiculo == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("La placa indicada no pertenece al conductor");
+        }
+
+        String nivel = tipoServicio.equals("T")
+                ? determinarNivel(vehiculo)
+                : null;
+
+        Disponibilidad disponibilidadActualizada = new Disponibilidad(
+                disponibilidadDTO.isLunes(),
+                disponibilidadDTO.isMartes(),
+                disponibilidadDTO.isMiercoles(),
+                disponibilidadDTO.isJueves(),
+                disponibilidadDTO.isViernes(),
+                disponibilidadDTO.isSabado(),
+                disponibilidadDTO.isDomingo(),
+                disponibilidadDTO.getHoraInicio(),
+                disponibilidadDTO.getHoraFin(),
+                disponibilidadDTO.getPlaca(),
+                nivel,
+                tipoServicio);
+
+        for (int i = 0; i < conductor.getDisponibilidades().size(); i++) {
+            if (i == indice) {
+                continue;
+            }
+            Disponibilidad existente = conductor.getDisponibilidades().get(i);
+            if (seSuperpone(disponibilidadActualizada, existente)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("La disponibilidad se superpone con otra ya registrada para el conductor");
+            }
+        }
+
+        conductor.getDisponibilidades().set(indice, disponibilidadActualizada);
+        conductorRepository.save(conductor);
+
+        return ResponseEntity.ok(disponibilidadActualizada);
     }
 }
 
