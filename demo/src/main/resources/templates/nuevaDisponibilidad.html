@@ -1,0 +1,48 @@
+<h2>Nueva Disponibilidad</h2>
+
+<div th:if="${error}">
+    <p style="color:red" th:text="${error}"></p>
+</div>
+
+<form th:action="@{'/Conductor/guardarDisponibilidad/{conductor.id}"
+      method="post"
+      th:object="${disponibilidad}">
+
+    <label>Placa del vehículo:</label>
+    <select th:field="*{placa}">
+        <option th:each="v : ${conductor.vehiculos}" 
+                th:value="${v.placa}" 
+                th:text="${v.placa}">
+        </option>
+    </select>
+    <br>
+
+    <label>Tipo de servicio:</label>
+    <select th:field="*{tipoServicio}">
+        <option value="T">Taxi</option>
+        <option value="D">Delivery</option>
+        <option value="M">Mensajería</option>
+    </select>
+    <br>
+
+    <label>Días:</label><br>
+    <label><input type="checkbox" th:field="*{lunes}"> Lunes</label>
+    <label><input type="checkbox" th:field="*{martes}"> Martes</label>
+    <label><input type="checkbox" th:field="*{miercoles}"> Miércoles</label>
+    <label><input type="checkbox" th:field="*{jueves}"> Jueves</label>
+    <label><input type="checkbox" th:field="*{viernes}"> Viernes</label>
+    <label><input type="checkbox" th:field="*{sabado}"> Sábado</label>
+    <label><input type="checkbox" th:field="*{domingo}"> Domingo</label>
+    <br><br>
+
+    <label>Hora inicio:</label>
+    <input type="time" th:field="*{horaInicio}">
+    <br>
+
+    <label>Hora fin:</label>
+    <input type="time" th:field="*{horaFin}">
+    <br><br>
+
+    <button type="submit">Guardar</button>
+    <br>
+</form>
