@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Disponibilidad</title>
+</head>
+<body>
+
+<h2>Editar Disponibilidad</h2>
+
+<!-- FORMULARIO -->
+<form th:action="@{|/Conductor/${conductorId}/disponibilidades/${indice}/editar|}" method="post">
+
+    <label>Placa del vehículo:</label>
+    <input type="text" name="placa" th:value="${disponibilidad.placa}" required>
+    <br><br>
+
+    <label>Tipo de servicio (T / D / M):</label>
+    <input type="text" name="tipoServicio" th:value="${disponibilidad.tipoServicio}" required>
+    <br><br>
+
+    <label>Días disponibles:</label><br>
+    <label><input type="checkbox" name="lunes" th:checked="${disponibilidad.lunes}"> Lunes</label><br>
+    <label><input type="checkbox" name="martes" th:checked="${disponibilidad.martes}"> Martes</label><br>
+    <label><input type="checkbox" name="miercoles" th:checked="${disponibilidad.miercoles}"> Miércoles</label><br>
+    <label><input type="checkbox" name="jueves" th:checked="${disponibilidad.jueves}"> Jueves</label><br>
+    <label><input type="checkbox" name="viernes" th:checked="${disponibilidad.viernes}"> Viernes</label><br>
+    <label><input type="checkbox" name="sabado" th:checked="${disponibilidad.sabado}"> Sábado</label><br>
+    <label><input type="checkbox" name="domingo" th:checked="${disponibilidad.domingo}"> Domingo</label><br><br>
+
+    <label>Hora inicio:</label>
+    <input type="time" name="horaInicio" th:value="${disponibilidad.horaInicio}" required>
+    <br><br>
+
+    <label>Hora fin:</label>
+    <input type="time" name="horaFin" th:value="${disponibilidad.horaFin}" required>
+    <br><br>
+
+    <button type="submit">Guardar cambios</button>
+</form>
+
+<br>
+<a th:href="@{|/Conductor/Inicio/${conductorId}|}">Volver</a>
+
+</body>
+</html>
