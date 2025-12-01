@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import uniandes.edu.co.demo.modelo.Conductor2;
 import uniandes.edu.co.demo.repository.ConductorRepository;
 
 
@@ -35,18 +36,31 @@ public class ConductorControlerHTMLS {
             Model model) {
 
         
-        conductorRepository.registrarConductor(id, nombre, celular, cedula, email);
-
+        Conductor2 c = new Conductor2(id, nombre, celular, cedula, email);
+        conductorRepository.save(c);
         model.addAttribute("nombre", nombre);
         model.addAttribute("id", id);
+        model.addAttribute("conductor", c);
+        model.addAttribute("email", email);
 
         return "redirect:/Conductor/Inicio/" + id;
     }
 
-    @GetMapping("/Inicio/{id}")
+   @GetMapping("/Inicio/{id}")
     public String inicioConductor(@PathVariable int id, Model model) {
-        model.addAttribute("id", id);
+
+        var conductor = conductorRepository.findById(id);
+
+        if(conductor.isPresent()) {
+            model.addAttribute("nombre", conductor.get().getNombre());
+            model.addAttribute("id", conductor.get().getId());
+        } else {
+            model.addAttribute("nombre", "Desconocido");
+            model.addAttribute("id", id);
+        }
+
         return "InicioConductor";
     }
+
 
 }

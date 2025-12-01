@@ -22,6 +22,5 @@ public interface ConductorRepository extends MongoRepository <Conductor2, Intege
     @Query("{ 'vehiculos.placa': ?0 }")
     Vehiculo2 getVehiculoPorPlaca(String placa);
 
-    @Query("{$insert: { _id: ?0, nombre: ?1, celular: ?2, cedula: ?3, email: ?4}}")
-    void registrarConductor(int id, String nombre, String celular, String cedula, String email);
+    
 }

@@ -6,9 +6,9 @@
 </head>
 <body>
 
-    <h1>Bienvenido Conductor</h1>
+    <h1>Bienvenido Conductor <span th:text="${nombre}"></span></h1>
 
-    <p>Su ID es: <strong>${id}</strong></p>
+    <p>Su ID es: <strong><span th:text="${id}"></span></strong></p>
 
     <a href="/UsuarioMenu">Volver al menú</a>
 
