@@ -14,9 +14,6 @@ public class Disponibilidad {
     private String nivel;
     private String tipoServicio;
 
-    public Disponibilidad() {
-    }
-
     public Disponibilidad( boolean lunes, boolean martes, boolean miercoles, boolean jueves,
             boolean viernes, boolean sabado, boolean domingo, String horaInicio, String horaFin, String placa,
             String nivel, String tipoServicio) {
@@ -31,8 +28,9 @@ public class Disponibilidad {
         this.horaFin = horaFin;
         this.placa = placa;
         this.nivel = nivel;
-        this.tipoServicio=tipoServicio;
+        this.tipoServicio = tipoServicio;
     }
+    
 
     public boolean isLunes() {
         return Lunes;
@@ -122,15 +120,15 @@ public class Disponibilidad {
         this.nivel = nivel;
     }
 
+
     public String getTipoServicio() {
         return tipoServicio;
     }
 
+
     public void setTipoServicio(String tipoServicio) {
         this.tipoServicio = tipoServicio;
     }
-
-    
 
     
 

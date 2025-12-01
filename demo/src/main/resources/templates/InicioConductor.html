@@ -3,12 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Inicio Conductor</title>
+    
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> 
 </head>
 <body>
 
     <h1>Bienvenido Conductor <span th:text="${nombre}"></span></h1>
 
     <p>Su ID es: <strong><span th:text="${id}"></span></strong></p>
+
+    <h3>Vehículos registrados</h3>
+
+<!-- Si está vacía -->
+<p th:if="${vehiculos == null or #lists.isEmpty(vehiculos)}">
+    No hay vehículos registrados.
+</p>
+
+<!-- Si tiene vehículos -->
+<table class="table table-bordered" th:if="${vehiculos != null and !#lists.isEmpty(vehiculos)}" border="1" cellpadding="5">
+    <tr>
+        <th>Placa</th>
+        <th>Tipo</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Color</th>
+        <th>Ciudad</th>
+        <th>Capacidad</th>
+    </tr>
+
+    <tr th:each="v : ${vehiculos}">
+        <td th:text="${v.placa}"></td>
+        <td th:text="${v.tipo}"></td>
+        <td th:text="${v.marca}"></td>
+        <td th:text="${v.modelo}"></td>
+        <td th:text="${v.color}"></td>
+        <td th:text="${v.ciudadPlaca}"></td>
+        <td th:text="${v.capacidad}"></td>
+    </tr>
+</table>
+    <br>
+    <a type="button" class="btn btn-info" th:href="@{/Conductor/RegistrarVehiculo/{id}(id=${id})}">
+        Registrar nuevo vehículo
+    </a>
+    <br><br>
+    <br>
+    <h3>Disponibilidades registradas</h3>
+
+<!-- Si no tiene ninguna -->
+<p th:if="${disponibilidades == null or #lists.isEmpty(disponibilidades)}">
+    No hay disponibilidades registradas.
+</p>
+
+<!-- Si sí tiene -->
+<table th:if="${disponibilidades != null and !#lists.isEmpty(disponibilidades)}" border="1" cellpadding="5">
+    <tr>
+        <th>Días</th>
+        <th>Hora Inicio</th>
+        <th>Hora Fin</th>
+        <th>Placa</th>
+        <th>Nivel</th>
+        <th>Tipo Servicio</th>
+    </tr>
+
+    <tr th:each="d : ${disponibilidades}">
+        <td>
+            <span th:if="${d.lunes}">Lunes </span>
+            <span th:if="${d.martes}">Martes </span>
+            <span th:if="${d.miercoles}">Miércoles </span>
+            <span th:if="${d.jueves}">Jueves </span>
+            <span th:if="${d.viernes}">Viernes </span>
+            <span th:if="${d.sabado}">Sábado </span>
+            <span th:if="${d.domingo}">Domingo </span>
+        </td>
+
+        <td th:text="${d.horaInicio}"></td>
+        <td th:text="${d.horaFin}"></td>
+        <td th:text="${d.placa}"></td>
+        <td th:text="${d.nivel}"></td>
+        <td th:text="${d.tipoServicio}"></td>
+    </tr>
+</table>
+<br>
+    <a type="button" class="btn btn-info" th:href="@{/Conductor/RegistrarVehiculo/{id}(id=${id})}">
+        Registrar disponibilidad
+    </a>
+<br> <br>
+<br>
+
 
     <a href="/Menu">Volver al menú</a>
 
