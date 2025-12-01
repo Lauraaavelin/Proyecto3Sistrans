@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import uniandes.edu.co.demo.modelo.UsuarioServicio;
 import uniandes.edu.co.demo.repository.UsuarioServicioRepository;
+import uniandes.edu.co.demo.modelo.Tarjeta;
 
 @RestController
 @RequestMapping("/usuarios-servicio")
@@ -23,7 +24,7 @@ public class UsuarioServicioController {
             @RequestParam String celular,
             @RequestParam String cedula,
             @RequestParam String email,
-            @RequestBody Object tarjeta) {
+            @RequestBody Tarjeta tarjeta) {
 
         usuarioServicioRepo.insertarUsuarioServicio(id, nombre, celular, cedula, email, tarjeta);
         return "Usuario de servicio creado correctamente.";
